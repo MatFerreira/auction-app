@@ -1,0 +1,11 @@
+<h2>Itens Cadastrados</h2>
+
+<%= link_to 'Cadastrar Item', new_item_path %>
+
+<% if @items.empty? %>
+  <p>Não há itens cadastrados</p>
+<% end %>
+
+<% @items.each do |item| %>
+  <%= render item %>
+<% end %>

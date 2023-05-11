@@ -1,0 +1,69 @@
+<%= form_with model: item do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <% item.errors.full_messages_for(:name).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+    <% item.errors.full_messages_for(:description).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :weight %>
+    <%= f.number_field :weight %>
+    <% item.errors.full_messages_for(:weight).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :width %>
+    <%= f.number_field :width %>
+    <% item.errors.full_messages_for(:width).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :height %>
+    <%= f.number_field :height %>
+    <% item.errors.full_messages_for(:height).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :depth %>
+    <%= f.number_field :depth %>
+    <% item.errors.full_messages_for(:depth).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :product_category %>
+    <%= f.text_field :product_category %>
+    <% item.errors.full_messages_for(:product_category).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :picture %>
+    <%= f.file_field :picture %>
+    <% item.errors.full_messages_for(:picture).each do |msg| %>
+      <div><%= msg %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

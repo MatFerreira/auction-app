@@ -1,0 +1,37 @@
+<div>
+  <h2><%= "Item: #{@item.code}" %></h2>
+
+  <% if @item.picture.attached? %>
+    <%= image_tag @item.picture.variant(:thumb) %>
+  <% end %>
+
+  <dl>
+    <dt><%= Item.human_attribute_name(:name) %>:</dt>
+    <dd><%= @item.name %></dd>
+
+    <dt><%= Item.human_attribute_name(:description) %>:</dt>
+    <dd><%= @item.description %></dd>
+
+    <dt><%= Item.human_attribute_name(:product_category) %>:</dt>
+    <dd><%= @item.product_category %></dd>
+
+    <dt><%= Item.human_attribute_name(:weight) %>:</dt>
+    <dd><%= @item.weight %> g</dd>
+
+    <dt><%= Item.human_attribute_name(:width) %>:</dt>
+    <dd><%= @item.width %> cm</dd>
+
+    <dt><%= Item.human_attribute_name(:height) %>:</dt>
+    <dd><%= @item.height %> cm</dd>
+
+    <dt><%= Item.human_attribute_name(:depth) %>:</dt>
+    <dd><%= @item.depth %> cm</dd>
+  </dl>
+</div>
+
+<div>
+  <%= link_to 'Editar', edit_item_path(@item) %>
+</div>
+<div>
+  <%= button_to 'Excluir', item_path(@item), method: :delete %>
+</div>

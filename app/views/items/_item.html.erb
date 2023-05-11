@@ -1,0 +1,20 @@
+<div>
+  <%= link_to item_path(item.id) do %>
+    <h3><%= "Item: #{item.code}" %></h3>
+  <% end %>
+
+  <% if item.picture.attached? %>
+    <%= image_tag item.picture.variant(:thumb) %>
+  <% end %>
+
+  <dl>
+    <dt><%= Item.human_attribute_name(:name) %>:</dt>
+    <dd><%= item.name %></dd>
+
+    <dt><%= Item.human_attribute_name(:description) %>:</dt>
+    <dd><%= item.description %></dd>
+
+    <dt><%= Item.human_attribute_name(:product_category) %>:</dt>
+    <dd><%= item.product_category %></dd>
+  </dl>
+</div>
