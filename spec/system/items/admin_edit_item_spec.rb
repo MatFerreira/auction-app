@@ -1,11 +1,13 @@
 require 'rails_helper'
 
-describe 'Usuário edita item' do
+describe 'Administrador edita item' do
   it 'com sucesso' do
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
     item = Item.create!(name: 'micro-ondas', description: 'bom estado',
                         weight: 5000, width: 60, height: 30, depth: 30,
                         product_category: 'eletrodoméstico')
 
+    login_as admin
     visit root_path
     click_on 'Itens'
     click_on "Item: #{item.code}"
@@ -29,10 +31,12 @@ describe 'Usuário edita item' do
   end
 
   it 'com dados inválidos' do
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
     item = Item.create!(name: 'micro-ondas', description: 'bom estado',
                         weight: 5000, width: 60, height: 30, depth: 30,
                         product_category: 'eletrodoméstico')
 
+    login_as admin
     visit root_path
     click_on 'Itens'
     click_on "Item: #{item.code}"

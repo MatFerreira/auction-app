@@ -17,6 +17,9 @@
         <ul>
           <li><%= link_to 'Início', root_path %></li>
           <li><%= link_to 'Itens', items_path %></li>
+          <% if admin_signed_in? %>
+            <li><%= current_admin.email %> <%= button_to 'Sair', destroy_admin_session_path, method: :delete %> </li>
+          <% end %>
         </ul>
       </nav>
 

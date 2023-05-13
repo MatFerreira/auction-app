@@ -1,7 +1,10 @@
 require 'rails_helper'
 
-describe 'Usuário acessa index de itens' do
+describe 'Administrador acessa index de itens' do
   it 'vazio' do
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
+
+    login_as admin
     visit root_path
     click_on 'Itens'
 
@@ -9,6 +12,7 @@ describe 'Usuário acessa index de itens' do
   end
 
   it 'com registros' do
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
     first_item = Item.create!(name: 'micro-ondas', description: 'bom estado', weight: 5000,
                               width: 60, height: 30, depth: 30, product_category: 'eletrodoméstico',
                               code: '12345abcde')
@@ -16,7 +20,7 @@ describe 'Usuário acessa index de itens' do
     second_item = Item.create!(name: 'armário', description: 'quatro portas', weight: 25000,
                               width: 250, height: 200, depth: 100, product_category: 'mobilha',
                               code: 'abcde12345')
-
+    login_as admin
     visit root_path
     click_on 'Itens'
 

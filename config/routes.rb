@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :admins
   root "home#index"
 
-  resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  authenticate :admin do
+    resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  end
 end

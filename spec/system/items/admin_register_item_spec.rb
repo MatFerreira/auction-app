@@ -1,9 +1,11 @@
 require 'rails_helper'
 
-describe 'Usuário cadastra novo item' do
+describe 'Administrador cadastra novo item' do
   it 'com sucesso' do
     allow(SecureRandom).to receive(:alphanumeric).and_return('ABCDE12345')
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
 
+    login_as admin
     visit root_path
     click_on 'Itens'
     click_on 'Cadastrar Item'
@@ -28,6 +30,9 @@ describe 'Usuário cadastra novo item' do
   end
 
   it 'com informação incompleta' do
+    admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
+
+    login_as admin
     visit root_path
     click_on 'Itens'
     click_on 'Cadastrar Item'
