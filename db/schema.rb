@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_222500) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_14_014848) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -63,8 +63,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_222500) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "lot_id"
+    t.index ["lot_id"], name: "index_items_on_lot_id"
+  end
+
+  create_table "lots", force: :cascade do |t|
+    t.string "code"
+    t.date "initial_date"
+    t.date "limit_date"
+    t.decimal "minimum_bid"
+    t.decimal "minimum_bid_increment"
+    t.integer "status", default: 0
+    t.integer "creator_id", null: false
+    t.integer "publisher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["creator_id"], name: "index_lots_on_creator_id"
+    t.index ["publisher_id"], name: "index_lots_on_publisher_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "lots"
+  add_foreign_key "lots", "admins", column: "creator_id"
+  add_foreign_key "lots", "admins", column: "publisher_id"
 end

@@ -8,6 +8,9 @@ class Admin < ApplicationRecord
   validates_with CpfValidator
   validate :email_domain_is_valid
 
+  has_many :created_lots, class_name: 'Lot', foreign_key: 'creator_id'
+  has_many :published_lots, class_name: 'Lot', foreign_key: 'publisher_id'
+
   private
   def email_domain_is_valid
     admin_domain = 'leilaodogalpao.com.br'

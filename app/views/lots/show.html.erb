@@ -1,0 +1,43 @@
+<section id="lot-info">
+  <h2>Lote <%= @lot.code %></h2>
+  <dl>
+    <dt><%= Lot.human_attribute_name :initial_date %>:</dt>
+    <dd><%= I18n.l @lot.initial_date %></dd>
+
+    <dt><%= Lot.human_attribute_name :limit_date %>:</dt>
+    <dd><%= I18n.l @lot.limit_date %></dd>
+
+    <dt><%= Lot.human_attribute_name :minimum_bid %>:</dt>
+    <dd><%= number_to_currency @lot.minimum_bid %></dd>
+
+    <dt><%= Lot.human_attribute_name :minimum_bid_increment %>:</dt>
+    <dd><%= number_to_currency @lot.minimum_bid_increment %></dd>
+  </dl>
+</section>
+
+<% if @lot.waiting_approval? %>
+  <section>
+    <%= form_with(url: update_status_lot_path(@lot.id), method: :post) do |f| %>
+      <%= f.hidden_field :status, name: 'status', value: 'published' %>
+      <%= f.submit 'Publicar Lote' %>
+    <% end %>
+  </section>
+
+  <section>
+    <h3>Adicionar / Remover Items</h3>
+
+    <%= form_with model: @lot do |f| %>
+      <%= collection_check_boxes(:lot, :item_ids, @items, :id, :full_description) %>
+      <%= f.submit 'Atualizar Items' %>
+    <% end %>
+  </section>
+
+<% elsif @lot.published? %>
+  <section id="lot-items">
+    <h3>Items</h3>
+
+    <% @lot.items.each do |item| %>
+      <%= render item %>
+    <% end %>
+  </section>
+<% end %>

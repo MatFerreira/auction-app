@@ -1,0 +1,27 @@
+<h2>Novo Lote</h2>
+
+<%= form_with model: @lot do |f| %>
+  <div>
+    <%= f.label :code %>
+    <%= f.text_field :code %>
+  </div>
+  <div>
+    <%= f.label :initial_date %>
+    <%= f.date_field :initial_date %>
+  </div>
+  <div>
+    <%= f.label :limit_date %>
+    <%= f.date_field :limit_date %>
+  </div>
+  <div>
+    <%= f.label :minimum_bid %>
+    <%= f.number_field :minimum_bid %>
+  </div>
+  <div>
+    <%= f.label :minimum_bid_increment %>
+    <%= f.number_field :minimum_bid_increment %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar' %>
+  </div>
+<% end %>

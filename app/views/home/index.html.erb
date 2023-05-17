@@ -1,1 +1,23 @@
-<h2>Lotes</h2>
+<section id='ongoing-lots'>
+  <h2>Lotes em Andamento</h2>
+
+  <% if @ongoing_lots.empty? %>
+    <p>Não há lotes em andamento</p>
+  <% end %>
+
+  <% @ongoing_lots.each do |lot| %>
+    <%= render lot %>
+  <% end %>
+</section>
+
+<section id="future-lots">
+  <h2>Lotes Futuros</h2>
+
+  <% if @future_lots.empty? %>
+    <p>Não há lotes futuros</p>
+  <% end %>
+
+  <% @future_lots.each do |lot| %>
+    <%= render lot %>
+  <% end %>
+</section>

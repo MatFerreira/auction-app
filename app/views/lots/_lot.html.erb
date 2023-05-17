@@ -1,0 +1,18 @@
+<div>
+  <%= link_to lot_path(lot.id) do %>
+    <h3>Lote <%= lot.code %></h3>
+  <% end %>
+  <dl>
+    <dt><%= Lot.human_attribute_name :initial_date %>:</dt>
+    <dd><%= I18n.l lot.initial_date %></dd>
+
+    <dt><%= Lot.human_attribute_name :limit_date %>:</dt>
+    <dd><%= I18n.l lot.limit_date %></dd>
+
+    <dt><%= Lot.human_attribute_name :minimum_bid %>:</dt>
+    <dd><%= number_to_currency lot.minimum_bid %></dd>
+
+    <dt><%= Lot.human_attribute_name :minimum_bid_increment %>:</dt>
+    <dd><%= number_to_currency lot.minimum_bid_increment %></dd>
+  </dl>
+</div>

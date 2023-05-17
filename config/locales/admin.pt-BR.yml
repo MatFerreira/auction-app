@@ -3,5 +3,8 @@ pt-BR:
     models:
       admin: "Administrador"
     attributes:
-      user:
+      admin:
         cpf: "CPF"
+        email: "E-mail"
+        password: "Senha"
+        password_confirmation: "Confirme sua senha"
