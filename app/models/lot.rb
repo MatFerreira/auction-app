@@ -5,6 +5,7 @@ class Lot < ApplicationRecord
   belongs_to :publisher, class_name: 'Admin', optional: true
 
   has_many :items
+  has_many :bids
 
   enum status: { waiting_approval: 0, published: 1 }
 end

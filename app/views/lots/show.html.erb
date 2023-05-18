@@ -16,14 +16,14 @@
 </section>
 
 <% if @lot.waiting_approval? %>
-  <section>
+  <section id="publish-lot-form">
     <%= form_with(url: update_status_lot_path(@lot.id), method: :post) do |f| %>
       <%= f.hidden_field :status, name: 'status', value: 'published' %>
       <%= f.submit 'Publicar Lote' %>
     <% end %>
   </section>
 
-  <section>
+  <section id="update-lot-items-form">
     <h3>Adicionar / Remover Items</h3>
 
     <%= form_with model: @lot do |f| %>
@@ -40,4 +40,37 @@
       <%= render item %>
     <% end %>
   </section>
+
+  <section id="bid-info">
+    <h3>Lances</h3>
+    <% if @highest_bid.nil? %>
+      <p>Não há lances neste lote</p>
+    <% else %>
+      <h4>Maior lance</h4>
+      <dl>
+        <dt><%= Bid.human_attribute_name :user_id %>:</dt>
+        <dd><%= @highest_bid.user.email %></dd>
+        <dt><%= Bid.human_attribute_name :value %>:</dt>
+        <dd><%= number_to_currency @highest_bid.value %></dd>
+      </dl>
+    <% end %>
+
+  </section>
+
+  <% if user_signed_in? %>
+    <section id="bid-form">
+    <h3>Fazer um lance</h3>
+    <%= form_with(model: Bid.new) do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :lot_id, value: @lot.id %>
+      <div>
+        <%= f.label :value %>
+        <%= f.number_field :value %>
+      </div>
+      <div>
+        <%= f.submit 'Enviar' %>
+      </div>
+    <% end %>
+    </section>
+  <% end %>
 <% end %>

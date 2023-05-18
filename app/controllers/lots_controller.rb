@@ -6,6 +6,7 @@ class LotsController < ApplicationController
   def show
     @lot = Lot.find params[:id]
     @items = Item.where(lot_id: nil).or Item.where(lot_id: @lot.id)
+    @highest_bid = Bid.where(lot_id: @lot.id).order(value: :desc).first
   end
 
   def new

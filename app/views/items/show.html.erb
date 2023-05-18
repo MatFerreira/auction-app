@@ -29,9 +29,11 @@
   </dl>
 </div>
 
-<div>
-  <%= link_to 'Editar', edit_item_path(@item) %>
-</div>
-<div>
-  <%= button_to 'Excluir', item_path(@item), method: :delete %>
-</div>
+<% if admin_signed_in? %>
+  <div>
+    <%= link_to 'Editar', edit_item_path(@item) %>
+  </div>
+  <div>
+    <%= button_to 'Excluir', item_path(@item), method: :delete %>
+  </div>
+<% end %>

@@ -4,7 +4,7 @@ describe 'Administrador acessa index de itens' do
   it 'vazio' do
     admin = Admin.create!(email: 'fulano@leilaodogalpao.com.br', cpf: '29973194047', password: 'fulano')
 
-    login_as admin
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Itens'
 
@@ -20,7 +20,7 @@ describe 'Administrador acessa index de itens' do
     second_item = Item.create!(name: 'armário', description: 'quatro portas', weight: 25000,
                               width: 250, height: 200, depth: 100, product_category: 'mobilha',
                               code: 'abcde12345')
-    login_as admin
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Itens'
 

@@ -6,7 +6,7 @@ describe 'Administrador cadastra novo lote' do
     initial_date = I18n.l(5.days.ago.to_date)
     limit_date = I18n.l(20.days.from_now.to_date)
 
-    login_as admin
+    login_as(admin, scope: :admin)
     visit new_lot_path
     fill_in 'Código', with: 'EFG123456'
     fill_in 'Data de início', with: initial_date
@@ -39,13 +39,13 @@ describe 'Administrador cadastra novo lote' do
 
     third_item = Item.create!(name: 'panela de pressão', description: 'inox', product_category: 'utensílios')
 
-    login_as creator
+    login_as(creator, scope: :admin)
     visit lot_path(lot.id)
     page.check first_item.full_description
     page.check third_item.full_description
     click_on 'Atualizar Items'
     logout(:creator)
-    login_as(publisher)
+    login_as(publisher, scope: :admin)
     click_on 'Publicar Lote'
 
     within 'section#lot-items' do

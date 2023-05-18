@@ -7,7 +7,7 @@ describe 'Administrador exclui item' do
                         weight: 5000, width: 60, height: 30, depth: 30,
                         product_category: 'eletrodoméstico')
 
-    login_as admin
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Itens'
     click_on "Item: #{item.code}"

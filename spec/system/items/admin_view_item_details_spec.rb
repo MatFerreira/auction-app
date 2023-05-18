@@ -6,7 +6,7 @@ describe 'Administrador acessa detalhes de um item' do
     item = Item.create!(name: 'micro-ondas', description: 'bom estado', weight: 5000,
                         width: 60, height: 30, depth: 30, product_category: 'eletrodoméstico')
 
-    login_as admin
+    login_as(admin, scope: :admin)
     visit root_path
     click_on 'Itens'
     click_on "Item: #{item.code}"

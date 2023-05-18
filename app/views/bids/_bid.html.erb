@@ -1,0 +1,8 @@
+<dl>
+  <dt><%= Bid.human_attribute_name :lot_id %>:</dt>
+  <dd><%= bid.lot.code %></dd>
+  <dt><%= Bid.human_attribute_name :user_id %>:</dt>
+  <dd><%= bid.user.email %></dd>
+  <dt><%= Bid.human_attribute_name :value %>:</dt>
+  <dd><%= bid.value %></dd>
+</dl>
