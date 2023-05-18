@@ -2,6 +2,7 @@ class LotsController < ApplicationController
   include ActiveSupport::NumberHelper
 
   before_action :authenticate_admin!, only: [:index, :new, :create, :update]
+  before_action :authenticate_user!, only: [:owned]
 
   def index
     @bid_lots = Lot.joins(:bids).where('lots.status = 1 AND lots.limit_date < ?', Date.today).distinct
@@ -52,6 +53,13 @@ class LotsController < ApplicationController
     end
     @lot.update(status: new_status)
     redirect_to lots_path
+  end
+
+  def owned
+    @owned_lots = Lot.joins(:bids)
+      .where(status: 2)
+      .where('bids.user_id = ?', current_user.id)
+      .where('bids.value = (SELECT MAX(value) FROM bids WHERE bids.lot_id = lots.id)')
   end
 
   private

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   resources :items, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   resources :lots, only: [:index, :show, :new, :create, :update] do
     post 'update_status', on: :member
+    get 'owned', on: :collection
   end
 end
