@@ -1,7 +1,12 @@
 class LotsController < ApplicationController
   include ActiveSupport::NumberHelper
 
-  before_action :authenticate_admin!, only: [:new, :create, :update]
+  before_action :authenticate_admin!, only: [:index, :new, :create, :update]
+
+  def index
+    @bid_lots = Lot.joins(:bids).where('lots.status = 1 AND lots.limit_date < ?', Date.today).distinct
+    @bidless_lots = Lot.left_outer_joins(:bids).where('lots.status = 1 AND lots.limit_date < ? AND bids.id IS NULL', Date.today)
+  end
 
   def show
     @lot = Lot.find params[:id]
@@ -35,11 +40,18 @@ class LotsController < ApplicationController
 
   def update_status
     @lot = Lot.find params[:id]
-    if @lot.waiting_approval? && @lot.creator != current_admin && @lot.update(status: params[:status])
-      redirect_to lot_path(@lot.id), notice: 'Lote publicado com sucesso.'
+    new_status = params[:status]
+    if @lot.waiting_approval? && @lot.creator != current_admin && new_status == 'published'
+      flash.notice = 'Lote publicado com sucesso.'
+    elsif @lot.published? && new_status == 'closed'
+      flash.notice = 'Lote encerrado com sucesso.'
+    elsif @lot.published? && new_status == 'canceled'
+      flash.notice = 'Lote cancelado com sucesso.'
     else
-      redirect_to lot_path(@lot.id), notice: 'Status do lote não atualizado'
+      redirect_to lots_path, alert: 'Status do lote não atualizado'
     end
+    @lot.update(status: new_status)
+    redirect_to lots_path
   end
 
   private

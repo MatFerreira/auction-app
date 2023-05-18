@@ -7,5 +7,5 @@ class Lot < ApplicationRecord
   has_many :items
   has_many :bids
 
-  enum status: { waiting_approval: 0, published: 1 }
+  enum status: { waiting_approval: 0, published: 1, closed: 2, canceled: 3}
 end

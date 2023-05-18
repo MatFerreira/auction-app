@@ -47,6 +47,7 @@ describe 'Administrador cadastra novo lote' do
     logout(:creator)
     login_as(publisher, scope: :admin)
     click_on 'Publicar Lote'
+    visit lot_path(lot.id)
 
     within 'section#lot-items' do
       expect(page).to have_content "Item: #{first_item.code}"

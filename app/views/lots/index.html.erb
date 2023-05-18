@@ -1,0 +1,25 @@
+<h2>Lotes com lance</h2>
+<section id="outdated-bid-lots">
+  <% @bid_lots.each do |lot| %>
+    <div>
+      <%= render lot %>
+      <%= form_with(url: update_status_lot_path(lot.id), method: :post) do |f| %>
+        <%= f.hidden_field :status, name:'status', value: 'closed' %>
+        <%= f.submit 'Encerrar Lote' %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<h2>Lotes sem lance</h2>
+<section id="outdated-bidless-lots">
+  <% @bidless_lots.each do |lot| %>
+    <div>
+      <%= render lot %>
+      <%= form_with(url: update_status_lot_path(lot.id), method: :post) do |f| %>
+        <%= f.hidden_field :status, name:'status', value: 'canceled' %>
+        <%= f.submit 'Cancelar Lote' %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
