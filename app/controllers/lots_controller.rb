@@ -5,6 +5,7 @@ class LotsController < ApplicationController
   before_action :authenticate_user!, only: [:owned]
 
   def index
+    @waiting_approval_lots = Lot.where('status = 0')
     @bid_lots = Lot.joins(:bids).where('lots.status = 1 AND lots.limit_date < ?', Date.today).distinct
     @bidless_lots = Lot.left_outer_joins(:bids).where('lots.status = 1 AND lots.limit_date < ? AND bids.id IS NULL', Date.today)
   end

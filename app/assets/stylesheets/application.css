@@ -21,6 +21,9 @@ body {
 }
 
 /* navbar */
+header {
+    margin-bottom: 25px;
+}
 
 ul.navbar {
     list-style-type: none;

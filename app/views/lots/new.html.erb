@@ -3,7 +3,7 @@
 <%= form_with model: @lot do |f| %>
   <div>
     <%= f.label :code %>
-    <%= f.text_field :code %>
+    <%= f.text_field :code, placeholder: '3 letras + 9 números' %>
   </div>
   <div>
     <%= f.label :initial_date %>

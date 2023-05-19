@@ -1,4 +1,19 @@
-<h2>Lotes com lance</h2>
+<%= link_to "Cadastrar Lote", new_lot_path %>
+
+<h2>Lotes aguardando aprovação</h2>
+<section id="waiting-approval-lots">
+  <% @waiting_approval_lots.each do |lot| %>
+    <div>
+      <%= render lot %>
+      <%= form_with(url: update_status_lot_path(lot.id), method: :post) do |f| %>
+        <%= f.hidden_field :status, name: 'status', value: 'published' %>
+        <%= f.submit 'Publicar Lote' %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<h2>Lotes aguardando encerramento</h2>
 <section id="outdated-bid-lots">
   <% @bid_lots.each do |lot| %>
     <div>
@@ -11,7 +26,7 @@
   <% end %>
 </section>
 
-<h2>Lotes sem lance</h2>
+<h2>Lotes aguardando cancelamento</h2>
 <section id="outdated-bidless-lots">
   <% @bidless_lots.each do |lot| %>
     <div>

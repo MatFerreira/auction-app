@@ -18,7 +18,7 @@
         <ul class="navbar">
           <li><%= link_to 'Início', root_path %></li>
           <% if admin_signed_in? %>
-            <li><%= link_to 'Lotes', lots_path %></li>
+            <li><%= link_to 'Gerenciamento de Lotes', lots_path %></li>
             <li><%= link_to 'Itens', items_path %></li>
             <li class="right-item"><%= button_to 'Sair', destroy_admin_session_path, method: :delete %></li>
             <li class="right-item">[admin] <%= current_admin.email %></li>
@@ -32,15 +32,15 @@
           <% end %>
         </ul>
       </nav>
-
-      <section>
-        <% flash.each do |type, msg| %>
-          <div>
-            <%= msg %>
-          </div>
-        <% end %>
-      </section>
     </header>
+
+    <section>
+      <% flash.each do |type, msg| %>
+        <div>
+          <%= msg %>
+        </div>
+      <% end %>
+    </section>
 
     <main>
       <%= yield %>
