@@ -1,24 +1,31 @@
-# README
+# Aplicação de Leilão de Estoque
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Versão do ruby:
 
-Things you may want to cover:
+    `3.2.1`
+* Versão do rails
 
-* Ruby version
+    `7.0.4.3`
+* Gem's externas
 
-* System dependencies
+    `devise` (autenticação)
 
-* Configuration
+    `image_processing` (processamento de imagens)
 
-* Database creation
+* Dependências de sistema:
 
-* Database initialization
+    `sqlite3` (banco de dados)
 
-* How to run the test suite
+    `libvips v8.6+` ou `ImageMagick` (para processamento de imagens)
 
-* Services (job queues, cache servers, search engines, etc.)
+* Configuração
 
-* Deployment instructions
+    `bundle install`
 
-* ...
+* Criação do banco de dados
+
+    `rails db:migrate`
+
+* Execução dos testes
+
+    `rspec`
