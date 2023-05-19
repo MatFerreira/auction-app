@@ -7,6 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
+    <link href='https://fonts.googleapis.com/css?family=Atkinson Hyperlegible' rel='stylesheet'>
   </head>
 
   <body>
@@ -14,17 +15,20 @@
       <h1>Leilão de Estoque</h1>
 
       <nav>
-        <ul>
+        <ul class="navbar">
           <li><%= link_to 'Início', root_path %></li>
           <% if admin_signed_in? %>
             <li><%= link_to 'Lotes', lots_path %></li>
             <li><%= link_to 'Itens', items_path %></li>
-            <li>[admin] <%= current_admin.email %> <%= button_to 'Sair', destroy_admin_session_path, method: :delete %> </li>
+            <li class="right-item"><%= button_to 'Sair', destroy_admin_session_path, method: :delete %></li>
+            <li class="right-item">[admin] <%= current_admin.email %></li>
           <% elsif user_signed_in? %>
             <li><%= link_to 'Meus Lotes', owned_lots_path %></li>
-            <li><%= current_user.email %> <%= button_to 'Sair', destroy_user_session_path, method: :delete %></li>
+            <li class="right-item"><%= button_to 'Sair', destroy_user_session_path, method: :delete %></li>
+            <li class="right-item"><%= current_user.email %> </li>
           <% else %>
-            <li>Entrar: <%= link_to 'Usuário', new_user_session_path %> | <%= link_to 'Administrador', new_admin_session_path %></li>
+            <li class="right-item"><%= link_to 'Administrador', new_admin_session_path %></li>
+            <li class="right-item"><%= link_to 'Usuário', new_user_session_path %></li>
           <% end %>
         </ul>
       </nav>
