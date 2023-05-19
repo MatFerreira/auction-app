@@ -16,10 +16,12 @@
       <nav>
         <ul>
           <li><%= link_to 'Início', root_path %></li>
-          <li><%= link_to 'Itens', items_path %></li>
           <% if admin_signed_in? %>
+            <li><%= link_to 'Lotes', lots_path %></li>
+            <li><%= link_to 'Itens', items_path %></li>
             <li>[admin] <%= current_admin.email %> <%= button_to 'Sair', destroy_admin_session_path, method: :delete %> </li>
           <% elsif user_signed_in? %>
+            <li><%= link_to 'Meus Lotes', owned_lots_path %></li>
             <li><%= current_user.email %> <%= button_to 'Sair', destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li>Entrar: <%= link_to 'Usuário', new_user_session_path %> | <%= link_to 'Administrador', new_admin_session_path %></li>
